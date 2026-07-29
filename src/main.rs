@@ -29,7 +29,16 @@ fn main() {
         Err(error) => panic!("{}", error),
     };
 
-    let _ = update_data(data, latest_post.title().unwrap(), data_path);
+    if latest_post.title().unwrap() != data.last_blog_title {
+        let _ = update_data(data, latest_post.title().unwrap(), data_path);
+    }
+
+    let regex_matched: bool =
+        check_for_regex(&latest_post.content.clone().unwrap(), config.regexes);
+
+    if regex_matched == true {
+        // ToDo
+    }
 }
 
 fn update_data(
@@ -39,4 +48,16 @@ fn update_data(
 ) -> Result<(), Box<dyn std::error::Error>> {
     data.last_blog_title = value.to_string();
     return json_util::save_to_json_file(data, path);
+}
+
+fn check_for_regex(text: &str, regexes: Vec<String>) -> bool {
+    let mut pattern_matched: bool = false;
+    let text = text.to_lowercase();
+
+    for regex in regexes.iter() {
+        if text.contains(&regex.to_lowercase()) {
+            pattern_matched = true;
+        }
+    }
+    return pattern_matched;
 }
