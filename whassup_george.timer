@@ -2,8 +2,8 @@
 Description=Runs whassup_george daily
 
 [Timer]
-OnCalendar=*_*_* 08:00:00
-Persisten=true
+OnCalendar=*-*-* 08:00:00
+Persistent=true
 
 [Install]
 WantedBy=timers.target
