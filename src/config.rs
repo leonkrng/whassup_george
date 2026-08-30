@@ -4,5 +4,6 @@ use serde::{Deserialize, Serialize};
 pub struct Config {
     pub sender_email: String,
     pub receiver_email: String,
+    pub smtp_relay : String,
     pub regexes: Vec<String>
 }

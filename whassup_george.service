@@ -1,0 +1,15 @@
+[Unit]
+Description=Mail service which notifies you if George R.R. Martin posts somethin about The Winds of Winter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=whassup_george
+Group=whassup_george
+
+ExecStart=/opt/whassup_george/whassup_george
+LoadCredential=smtp-password:/etc/whassup_george/smtp-password
+
+[Install]
+WantedBy=multi-user.target

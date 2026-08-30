@@ -1,8 +1,9 @@
-use std::path::Path;
 mod config;
 mod data;
 mod json_util;
+mod mail_util;
 mod rss_util;
+use std::path::Path;
 
 fn main() {
     // Read config-file
@@ -11,13 +12,13 @@ fn main() {
         json_util::get_from_json(config_path);
     let config: config::Config = match config {
         Ok(config) => config,
-        Err(error) => panic!("{}", error),
+        Err(error) => panic!("{} config error", error),
     };
 
     // Read data-file
     let data_path = Path::new("./src/config/data.json");
     let data: Result<data::Data, Box<dyn std::error::Error>> = json_util::get_from_json(data_path);
-    let data: data::Data = match data {
+    let mut data: data::Data = match data {
         Ok(data) => data,
         Err(error) => panic!("{}", error),
     };
@@ -29,28 +30,29 @@ fn main() {
         Err(error) => panic!("{}", error),
     };
 
-    if latest_post.title().unwrap() != data.last_blog_title {
-        let _ = update_data(data, latest_post.title().unwrap(), data_path);
+    let content: String = match latest_post.content {
+        Some(content) => content,
+        None => "".to_string(),
+    };
+
+    let current_blog_title: String = match latest_post.title {
+        Some(title) => title,
+        None => "".to_string(),
+    };
+
+    let regex_matched: bool = check_for_regex(&content, &config.regexes);
+
+    if regex_matched == true && current_blog_title != data.last_blog_title {
+        let _ = mail_util::send_mail(&config, "Regex matched", &content);
     }
 
-    let regex_matched: bool =
-        check_for_regex(&latest_post.content.clone().unwrap(), config.regexes);
-
-    if regex_matched == true {
-        // ToDo
+    if current_blog_title != data.last_blog_title {
+        data.last_blog_title = current_blog_title;
+        let _ = json_util::save_to_json_file(data, data_path);
     }
 }
 
-fn update_data(
-    mut data: data::Data,
-    value: &str,
-    path: &Path,
-) -> Result<(), Box<dyn std::error::Error>> {
-    data.last_blog_title = value.to_string();
-    return json_util::save_to_json_file(data, path);
-}
-
-fn check_for_regex(text: &str, regexes: Vec<String>) -> bool {
+fn check_for_regex(text: &str, regexes: &Vec<String>) -> bool {
     let mut pattern_matched: bool = false;
     let text = text.to_lowercase();
 
