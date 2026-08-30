@@ -1,7 +1,7 @@
 # whassup_george
 
-`whassup_george` is an Linxu-Service that notifies you if George R.R. Martin posts about the next installment of the ' A Song of Ice and Fire' Series (TWoW could release any second). 
-The service sends you an email if predefined regexes are matched in the most recent posts on Martins`Not a Blog`.
+`whassup_george` is an Linxu-Service that notifies you if George R. R. Martin posts about the next installment of the ' A Song of Ice and Fire' Series (TWoW could release any second). 
+The service sends you an email if one predefined regex is matched in the most recent posts on Martins [Not a Blog](https://georgerrmartin.com/notablog/).
 
 
 ## Configuration
@@ -11,7 +11,7 @@ You can also change the regexes that trigger the email.
 
 ## Installation
 
-Clone and build the repository with 'cargo':
+Clone and build the repository with `cargo`:
 
 ``` Bash 
 git clone https://github.com/leonkrng/whassup_george.git
