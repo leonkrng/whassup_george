@@ -1,8 +1,8 @@
 [Unit]
-Description=Run whassup_george daily
+Description=Runs whassup_george daily
 
 [Timer]
-OnCalender=*_*_* 08:00:00
+OnCalendar=*_*_* 08:00:00
 Persisten=true
 
 [Install]
