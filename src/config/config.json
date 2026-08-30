@@ -1,6 +1,6 @@
 {
-    "sender_email": "kroening.social@gmail.com",
-    "receiver_email": "le.kroening@gmail.com",
+    "sender_email": "example_sender@mail.com",
+    "receiver_email": "example_receiver@mail.com",
     "smtp_relay": "smtp.gmail.com",
     "regexes": [
         "The Winds Of Winter",
