@@ -40,7 +40,9 @@ fn main() {
         None => "".to_string(),
     };
 
-    let regex_matched: bool = check_for_regex(&content, &config.regexes);
+    let search_string: String = format!("{} {}", content, current_blog_title);
+
+    let regex_matched: bool = check_for_regex(&search_string, &config.regexes);
 
     if regex_matched == true && current_blog_title != data.last_blog_title {
         let _ = mail_util::send_mail(&config, "Regex matched", &content);
