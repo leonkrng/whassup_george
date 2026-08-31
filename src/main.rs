@@ -7,7 +7,7 @@ use std::path::Path;
 
 fn main() {
     // Read config-file
-    let config_path = Path::new("./src/config/config.json");
+    let config_path = Path::new("config.json");
     let config: Result<config::Config, Box<dyn std::error::Error>> =
         json_util::get_from_json(config_path);
     let config: config::Config = match config {
@@ -16,7 +16,7 @@ fn main() {
     };
 
     // Read data-file
-    let data_path = Path::new("./src/config/data.json");
+    let data_path = Path::new("data.json");
     let data: Result<data::Data, Box<dyn std::error::Error>> = json_util::get_from_json(data_path);
     let mut data: data::Data = match data {
         Ok(data) => data,
