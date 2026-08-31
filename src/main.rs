@@ -45,7 +45,7 @@ fn main() {
     let regex_matched: bool = check_for_regex(&search_string, &config.regexes);
 
     if regex_matched == true && current_blog_title != data.last_blog_title {
-        let _ = mail_util::send_mail(&config, "Regex matched", &content);
+        let _ = mail_util::send_mail(&config, &current_blog_title, &content);
     }
 
     if current_blog_title != data.last_blog_title {

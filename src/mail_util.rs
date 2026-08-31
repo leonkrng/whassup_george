@@ -13,12 +13,16 @@ pub fn send_mail(
     subject: &str,
     content: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
+
+    let subject: String = format!("Message from George: {}", subject);
+    let content: String = format!("Blog content: \n {} \n https://georgerrmartin.com/notablog/", content);
+
     let email = Message::builder()
         .from(config.sender_email.parse()?)
         .to(config.receiver_email.parse()?)
-        .subject(subject.to_string())
+        .subject(subject)
         .header(ContentType::TEXT_PLAIN)
-        .body(content.to_string())?;
+        .body(content)?;
 
     let mail = config.sender_email.to_owned();
     let password = get_credentials();
