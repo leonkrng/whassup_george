@@ -45,9 +45,10 @@ sudo chown root:root /etc/whassup_george/smtp-password
 sudo chmod 600 /etc/whassup_george/smtp-password
 ``` 
 
-Enable the service:
+Create user, group and enable the service:
 
 ``` Bash
+sudo useradd --system --home /opt/whassup_george --shell /usr/sbin/nologin whassup_george
 sudo systemctl daemon-reload
 sudo systemctl enable --now whassup_george.timer
 ```
