@@ -19,7 +19,7 @@ cd whassup_george
 cargo build --release
 ``` 
 
-Move the binary and config-files to the `opt` directory:
+Move the binary and config-files to the correct directory:
 
 ``` Bash
 sudo mkdir -p /opt/whassup_george
