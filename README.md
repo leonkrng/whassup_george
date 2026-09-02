@@ -1,6 +1,6 @@
 # whassup_george
 
-`whassup_george` is an Linxu-Service that notifies you if George R. R. Martin posts about the next installment of the ' A Song of Ice and Fire' Series (TWoW could release any second). 
+`whassup_george` is an Linux-Service that notifies you if George R. R. Martin posts about the next installment of the ' A Song of Ice and Fire' Series (TWoW could release any second). 
 The service sends you an email if one predefined regex is matched in the most recent posts on Martins [Not a Blog](https://georgerrmartin.com/notablog/).
 
 
