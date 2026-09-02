@@ -25,7 +25,8 @@ Move the binary and config-files to the `opt` directory:
 sudo mkdir -p /opt/whassup_george
 sudo cp target/release/whassup_george /opt/whassup_george/whassup_george
 sudo cp src/config/config.json /opt/whassup_george/config.json
-sudo cp src/config/data.json /opt/whassup_george/data.json
+sudo mkdir -p /var/lib/whassup_george
+sudo cp src/config/data.json /var/lib/whassup_george/data.json
 ```
 
 Move the `systemd`-files to the `systemd`-directory:

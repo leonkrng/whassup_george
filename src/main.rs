@@ -4,6 +4,8 @@ mod json_util;
 mod mail_util;
 mod rss_util;
 use std::path::Path;
+use std::path::PathBuf;
+use std::env;
 
 fn main() {
     // Read config-file
@@ -16,7 +18,11 @@ fn main() {
     };
 
     // Read data-file
-    let data_path = Path::new("data.json");
+    let data_dir = match env::var("STATE_DIRECTORY"){
+        Ok(dir) => dir,
+        Err(error) => panic!("{}", error),
+    };
+    let data_path = &PathBuf::from(data_dir).join("data.json");
     let data: Result<data::Data, Box<dyn std::error::Error>> = json_util::get_from_json(data_path);
     let mut data: data::Data = match data {
         Ok(data) => data,

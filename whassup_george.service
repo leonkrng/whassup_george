@@ -9,6 +9,7 @@ User=whassup_george
 Group=whassup_george
 
 WorkingDirectory=/opt/whassup_george
+StateDirectory=whassup_george
 ExecStart=/opt/whassup_george/whassup_george
 LoadCredential=smtp-password:/etc/whassup_george/smtp_password
 
